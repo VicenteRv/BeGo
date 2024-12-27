@@ -1,10 +1,11 @@
-import { Schema, model, Document} from "mongoose";
+import { Schema, model, Document, Types} from "mongoose";
 
 //Definicion de la Interfaz
 interface IUsuario extends Document {
     email: string;
     password: string;
-    isActive: boolean;
+    estado: boolean;
+    _id: Types.ObjectId;
 } 
 //SCHEMA del usuario
 const UsuarioSchema = new Schema<IUsuario>({
@@ -17,18 +18,13 @@ password: {
     type: String,
     required: [true, 'El password es obligatorio'],
 },
-isActive: {
+estado: {
     type: Boolean,
     required: true,
     default: true, // No esta eliminado
 }
 });
-  
-// Modificación para ocultar el campo _id y cambiarlo a uid
-UsuarioSchema.methods.toJSON = function () {
-const { __v, ...usuario } = this.toObject();
-return usuario;
-};
 
 // Exportar el modelo
-export default model<IUsuario>('Usuario', UsuarioSchema);
+export const Usuario = model<IUsuario>('Usuario', UsuarioSchema);
+

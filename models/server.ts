@@ -1,13 +1,16 @@
 import express, {Application} from "express";
-import userRoutes from "../routes/usuario";
 import cors from "cors";
+import cookieParser from "cookie-parser";
 import dbConnection from "../database/config";
+import authRoutes from "../routes/auth";
+import userRoutes from "../routes/usuario";
 
 class Server {
     private app:    Application;
     private port:   string;
     private paths:  Record<string,string> = {
-        usuario: '/api/usuario'
+        auth:       '/api/auth',
+        usuario:    '/api/usuario',
     }
 
     constructor(){
@@ -29,19 +32,22 @@ class Server {
     };
 
     middlewares(){
+        //cors
         this.app.use(cors());
-
+        // Lectura y parseo del body
         this.app.use(express.json());
-
+        // Configuración de cookie-parser
+        this.app.use(cookieParser());
+        //directorio publico
         this.app.use(express.static('public'));
     }
 
     routes(){
         //cors
+        this.app.use(this.paths.auth,authRoutes);
         this.app.use(this.paths.usuario,userRoutes);
-        //lectura del body
 
-        //publica
+
     }
     
     listen(){
