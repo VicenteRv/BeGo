@@ -4,6 +4,7 @@ import cookieParser from "cookie-parser";
 import dbConnection from "../database/config";
 import authRoutes from "../routes/auth";
 import userRoutes from "../routes/usuario";
+import truckRoutes from "../routes/truck";
 
 class Server {
     private app:    Application;
@@ -11,6 +12,7 @@ class Server {
     private paths:  Record<string,string> = {
         auth:       '/api/auth',
         usuario:    '/api/usuario',
+        truck:      '/api/truck',
     }
 
     constructor(){
@@ -46,6 +48,7 @@ class Server {
         //cors
         this.app.use(this.paths.auth,authRoutes);
         this.app.use(this.paths.usuario,userRoutes);
+        this.app.use(this.paths.truck,truckRoutes)
 
 
     }
