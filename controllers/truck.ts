@@ -91,6 +91,10 @@ export const putModificarTruck = async(req: Request<{ id: string }, any, { plate
         });
     }
     try {
+        const truck = await Truck.findOne({ _id: id, user: usuario.id });
+        if (!truck) {
+            return res.status(403).json({ msg: 'No tienes permiso para modificar este truck :(' });
+        }
          await Truck.findByIdAndUpdate(id,{
             plate,
             color
