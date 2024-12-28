@@ -5,6 +5,7 @@ import dbConnection from "../database/config";
 import authRoutes from "../routes/auth";
 import userRoutes from "../routes/usuario";
 import truckRoutes from "../routes/truck";
+import locationRoutes from "../routes/location";
 
 class Server {
     private app:    Application;
@@ -13,6 +14,7 @@ class Server {
         auth:       '/api/auth',
         usuario:    '/api/usuario',
         truck:      '/api/truck',
+        location:   '/api/location',
     }
 
     constructor(){
@@ -47,8 +49,9 @@ class Server {
     routes(){
         //cors
         this.app.use(this.paths.auth,authRoutes);
-        this.app.use(this.paths.usuario,userRoutes);
         this.app.use(this.paths.truck,truckRoutes)
+        this.app.use(this.paths.usuario,userRoutes);
+        this.app.use(this.paths.location,locationRoutes)
 
 
     }
