@@ -5,8 +5,9 @@ interface ITruck extends Document {
     user: Schema.Types.ObjectId;
     year: string;
     color: string;
-    plates: string;
-    _id: Types.ObjectId;
+    plate: string;
+    estado: boolean;
+    uid: Types.ObjectId;
 }
 //Schema
 const TruckSchema = new Schema<ITruck>({
@@ -23,12 +24,23 @@ const TruckSchema = new Schema<ITruck>({
         type: String,
         required: true
     },
-    plates: {
+    plate: {
         type: String,
-        required: true 
+        required: true,
+        unique:true,
+    },
+    estado: {
+        type: Boolean,
+        required:true,
+        default: true,
     }
 });
-
+// metodo para renombrar _id a uid y excluir __v
+TruckSchema.methods.toJSON = function() {
+    const { __v, _id, ...truck } = this.toObject();
+    truck.uid = _id; // Renombramos _id a uid
+    return truck;
+};
 export const Truck = model<ITruck>('Truck', TruckSchema);
 
 // export default Truck;
