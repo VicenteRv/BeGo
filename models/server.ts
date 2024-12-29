@@ -55,9 +55,6 @@ class Server {
         this.app.use(this.paths.order,orderRoutes);
         this.app.use(this.paths.truck,truckRoutes);
         this.app.use(this.paths.usuario,userRoutes);
-
-
-
     }
     
     listen(){

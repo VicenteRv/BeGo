@@ -2,6 +2,7 @@ import {Usuario} from "../models/usuario";
 import {Truck} from "../models/truck";
 import { Types } from 'mongoose';
 import { Location } from "../models/location";
+import { Order } from "../models/order";
 
 export const existeUsuario = async(email: string):Promise<void>=>{
     const existeUsuario = await Usuario.findOne({email});
@@ -43,3 +44,18 @@ export const existeLocationId = async(id:Types.ObjectId):Promise<void> =>{
         throw new Error(`El idLocation: ${id} no existe en la bd`)
     }
 }
+
+export const orderDuplicada = async (pickup: string, dropoff: string): Promise<boolean> => {
+    const existOrder = await Order.findOne({ pickup, dropoff });
+    if(existOrder){
+        return true;
+    }
+    return false;
+};
+
+export const existeIdOrder = async (id:Types.ObjectId): Promise<void> => {
+    const existIdOrder = await Order.findById(id);
+    if(!existIdOrder){
+        throw new Error(`No existe un order con id ${id} en la bd`)
+    }
+};
