@@ -666,3 +666,47 @@ y terminar al parte de orders fue mas facil cuando ya tenia todos los campos que
 ### Para terminar debo decir que personalemente fue un gran reto, donde de verdad se pusieron aprueba mis habilidades y conocimientos sobre la programacion relacionada con la parte del backend usando herramientos como lo son node.js, postman, mongodb, los paquetes de node como express, express-validator, mongoose, axios, cors, cookie-parser, jwt, dotenv... fue un gran reto que de verdad me hizo crecer un poco mas a la hora de desarrollar proyectos en tiempos determinados y me llevo un gran aprendizaje del msimo
 
 
+
+
+
+
+
+# ¿Como ejecutar el proyecto?
+una vez descargado el codigo de github de menera manual o abriendo una consola en la direccion donde se quiere descargar podemos ejecutar un
+```
+git clone https://github.com/VicenteRv/BeGo.git
+```
+y esto nos descargaria el proyecto dento de la carpete llamada BeGo
+Abrimos esta carpeta en visual y
+
+vamos a ejecutar en consola el comando
+```
+npm i 
+```
+
+para que se descarguen todas las dependencias para node
+Para instalar typeScript de manera global
+
+```
+npm install -g typescript
+```
+una vez instalado esto
+para ejecuta el codigo primero compilamos el codigo de ts, ejecutando lo siguiente en la consola
+```
+tsc
+```
+Une vez compilado, se nos creara la carpeta dist
+y ahi se encontrara el archivo app.js para ejecutar con node 
+# IMPORTANTE
+hayq ue crear el archivo .env en la raiz del proyecto con sus respectivos calores
+```.env
+PORT=
+MONGODB=
+SECRETORPRIVATEKEY=
+API_KEY=
+```
+Despues de asignarle el valor a nuestras variables de entorno podemos
+ejecutar el siguiente comando para correr el proyecto compilado
+```
+node .\dist\app.js
+```
